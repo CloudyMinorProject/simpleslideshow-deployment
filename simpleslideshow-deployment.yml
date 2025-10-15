@@ -1,0 +1,123 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simpleslideshow
+  namespace: groep-10-elizabeth
+  uid: e49bec69-7fd0-433e-9691-a49bb94f198e
+  resourceVersion: '9300395'
+  generation: 1
+  creationTimestamp: '2025-10-15T14:02:25Z'
+  annotations:
+    deployment.kubernetes.io/revision: '1'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-10-15T14:02:25Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:progressDeadlineSeconds': {}
+          'f:replicas': {}
+          'f:revisionHistoryLimit': {}
+          'f:selector': {}
+          'f:strategy':
+            'f:rollingUpdate':
+              .: {}
+              'f:maxSurge': {}
+              'f:maxUnavailable': {}
+            'f:type': {}
+          'f:template':
+            'f:metadata':
+              'f:labels':
+                .: {}
+                'f:app': {}
+            'f:spec':
+              'f:containers':
+                'k:{"name":"container"}':
+                  .: {}
+                  'f:image': {}
+                  'f:imagePullPolicy': {}
+                  'f:name': {}
+                  'f:ports':
+                    .: {}
+                    'k:{"containerPort":8080,"protocol":"TCP"}':
+                      .: {}
+                      'f:containerPort': {}
+                      'f:protocol': {}
+                  'f:resources': {}
+                  'f:terminationMessagePath': {}
+                  'f:terminationMessagePolicy': {}
+              'f:dnsPolicy': {}
+              'f:restartPolicy': {}
+              'f:schedulerName': {}
+              'f:securityContext': {}
+              'f:terminationGracePeriodSeconds': {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2025-10-15T14:33:23Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:deployment.kubernetes.io/revision': {}
+        'f:status':
+          'f:availableReplicas': {}
+          'f:conditions':
+            .: {}
+            'k:{"type":"Available"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+            'k:{"type":"Progressing"}':
+              .: {}
+              'f:lastTransitionTime': {}
+              'f:lastUpdateTime': {}
+              'f:message': {}
+              'f:reason': {}
+              'f:status': {}
+              'f:type': {}
+          'f:observedGeneration': {}
+          'f:readyReplicas': {}
+          'f:replicas': {}
+          'f:updatedReplicas': {}
+      subresource: status
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simpleslideshow
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simpleslideshow
+    spec:
+      containers:
+        - name: container
+          image: 'ghcr.io/elizabeth-e/fotoshow:sha-6e6c370'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
