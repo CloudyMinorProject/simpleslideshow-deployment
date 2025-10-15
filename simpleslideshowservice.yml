@@ -1,0 +1,45 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: simpleslideshowservice
+  namespace: groep-10-elizabeth
+  uid: 9538f8c9-dd48-46c4-a0b9-5c1cc20bf299
+  resourceVersion: '9292247'
+  creationTimestamp: '2025-10-15T14:05:41Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2025-10-15T14:20:51Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":18181,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.31.63.129
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 18181-tcp
+      protocol: TCP
+      port: 18181
+      targetPort: 18181
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.31.63.129
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: simpleslideshow
